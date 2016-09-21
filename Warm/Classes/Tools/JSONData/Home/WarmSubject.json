@@ -1,0 +1,75 @@
+//点击轮播图片进入专题 http://api.mid.warmup.cc/api/v6/subject/18
+//content: 为WebView的url
+{
+    "status": 200,
+    "result": {
+        "id": 18,
+        "title": "\u8fd9\u6837\u62cd\u7167\uff0c\u7528\u624b\u673a\u4e5f\u80fd\u7f8e\u8fc7\u5355\u53cd",
+        "avatar": "http:\/\/warmup.qiniudn.com\/subject\/avatar\/3bbef89244de0362fba3a210df7ac9f4",
+        "like_count": 22,
+        "created_at": 1472801432,
+        "updated_at": 1473685688,
+        "share_url": "http:\/\/web.warmup.cc\/index\/subjectview?id=18",
+        "content": "http:\/\/warmup.cc\/webview\/subject\/18",
+        "items": [{
+                  "id": "401",
+                  "type": 2,
+                  "info": "",
+                  "salon": {
+                  "id": 401,
+                  "userid": 18373,
+                  "title": "\u7ed9\u751c\u70b9\u62cd\u7167\uff0c\u6709\u54ea\u4e9b\u4e0a\u624b\u5feb\u53c8\u597d\u73a9\u7684\u6784\u56fe\uff1f",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/salon\/avatar\/ef6d8a76470651b6333904fb64905596",
+                  "user": {
+                  "id": 18373,
+                  "nickname": "Joy Chen",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/Fi-zkgofcRrR4M_ZKf1TEVwdnaao",
+                  "signature": "\u6d6a\u8ff9\u6b27\u6d32\u5927\u9646\u7684\u6444\u5f71\u7231\u597d\u8005 \u516c\u4f17\u53f7\uff1a\u5355\u8bcd\u672c"
+                  }
+                  }
+                  }, {
+                  "id": "405",
+                  "type": 2,
+                  "info": "",
+                  "salon": {
+                  "id": 405,
+                  "userid": 18373,
+                  "title": "\u9910\u5177\u600e\u4e48\u9009\uff0c\u624d\u53ef\u4ee5\u628a\u751c\u70b9\u62cd\u5f97\u597d\u770b\uff1f",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/salon\/avatar\/c5a39f791c4ba01841fe01e3d7f8a366",
+                  "user": {
+                  "id": 18373,
+                  "nickname": "Joy Chen",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/Fi-zkgofcRrR4M_ZKf1TEVwdnaao",
+                  "signature": "\u6d6a\u8ff9\u6b27\u6d32\u5927\u9646\u7684\u6444\u5f71\u7231\u597d\u8005 \u516c\u4f17\u53f7\uff1a\u5355\u8bcd\u672c"
+                  }
+                  }
+                  }, {
+                  "id": "404",
+                  "type": 2,
+                  "info": "",
+                  "salon": {
+                  "id": 404,
+                  "userid": 18373,
+                  "title": "\u4e00\u70b9\u5c0f\u5fc3\u601d\uff0c\u8ba9\u4f60\u62cd\u6444\u7684\u751c\u70b9\u53d8\u5f97\u66f4\u6709\u201c\u5473\u9053\u201d",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/salon\/avatar\/9493498c11dc0e69bf729b329a96ae8c",
+                  "user": {
+                  "id": 18373,
+                  "nickname": "Joy Chen",
+                  "avatar": "http:\/\/warmup.qiniudn.com\/Fi-zkgofcRrR4M_ZKf1TEVwdnaao",
+                  "signature": "\u6d6a\u8ff9\u6b27\u6d32\u5927\u9646\u7684\u6444\u5f71\u7231\u597d\u8005 \u516c\u4f17\u53f7\uff1a\u5355\u8bcd\u672c"
+                  }
+                  }
+                  }, {
+                  "id": "1891",
+                  "type": 1,
+                  "info": "",
+                  "classes": {
+                  "id": 1891,
+                  "name": "\u5341\u4e00\u957f\u5047\uff0c\u8ba9\u4f60\u7684\u624b\u673a\u65c5\u884c\u7167\u7247\u60ca\u8273\u670b\u53cb\u5708",
+                  "images": "http:\/\/warmup.qiniudn.com\/classes\/avatar\/c3f7f14b9ccca4e70f8a992d4fe6ccbc",
+                  "booking": 1
+                  }
+                  }],
+        "liked": false
+    }
+}

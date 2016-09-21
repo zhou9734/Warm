@@ -1,0 +1,15 @@
+{
+    "data": [{
+             "cityName": "北京",
+             "cityCode": "110100"
+             },{
+             "cityName": "上海",
+             "cityCode": "310100"
+             },{
+             "cityName": "广州",
+             "cityCode": "440100"
+             },{
+             "cityName": "深圳",
+             "cityCode": "440300"
+             }]
+}

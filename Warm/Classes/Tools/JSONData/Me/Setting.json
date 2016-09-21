@@ -1,0 +1,24 @@
+{
+    "data": [{
+                "leftTitle": "联系方式",
+                "rightTitle": "18123456789"
+             },{
+                "leftTitle": "密码",
+                "rightTitle": "修改密码"
+             },{
+                "leftTitle": "消息推送",
+                "rightTitle": ""
+             },{
+                "leftTitle": "清理缓存",
+                "rightTitle": ""
+             },{
+                "leftTitle": "关于取暖",
+                "rightTitle": ""
+             },{
+                "leftTitle": "意见反馈",
+                "rightTitle": ""
+             },{
+                "leftTitle": "用户协议",
+                "rightTitle": ""
+    }]
+}

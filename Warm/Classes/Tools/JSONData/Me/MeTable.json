@@ -1,0 +1,29 @@
+{
+    "data": [{
+        "menus": [{
+             "image": "shalon_24x24_",
+             "name": "话题"
+             },{
+             "image": "collect_24x24_",
+             "name": "收储"
+             },{
+             "image": "my_order_24x24_",
+             "name": "订单"
+             },{
+             "image": "coursesvouchers_24x24_",
+             "name": "课程卷"
+             },{
+             "image": "coupon_24x24_",
+             "name": "优惠券"
+             },{
+             "image": "goods_24x24_",
+             "name": "我的优选"
+             },{
+             "image": "authenticate_24x24_",
+             "name": "入住取暖"
+        }]},{
+        "menus": [{
+             "image": "setting_24x24_",
+             "name": "设置与帮助"
+    }]}]
+}
