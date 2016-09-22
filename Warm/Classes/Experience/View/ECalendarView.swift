@@ -43,7 +43,7 @@ class ECalendarView: UIView {
             btn.setTitle(days[i], forState: .Normal)
             btn.setTitleColor(UIColor.blackColor(), forState: .Normal)
             btn.titleLabel?.font = UIFont.systemFontOfSize(17)
-            btn.frame = CGRect(x: CGFloat(i) * btnWidth, y: 10, width: btnWidth - 20, height: btnWidth - 20)
+            btn.frame = CGRect(x: CGFloat(i) * btnWidth + 5, y: 5, width: btnWidth - 20, height: btnWidth - 20)
             addSubview(btn)
         }
 
@@ -59,8 +59,8 @@ class ECalendarView: UIView {
         for i in 0..<42{
             let btn = UIButton()
             btn.titleLabel?.font = UIFont.systemFontOfSize(17)
-            let y = (CGFloat(i / 7) + 1)*(btnWidth - 19)
-            btn.frame = CGRect(x: CGFloat(i % 7) * btnWidth, y: y, width: btnWidth - 20, height: btnWidth - 20)
+            let y = (CGFloat(i / 7) + 1)*(btnWidth - 10)
+            btn.frame = CGRect(x: CGFloat(i % 7) * btnWidth + 5, y: y, width: btnWidth - 20, height: btnWidth - 20)
             //上一个月的日历
             if i < firstweek - 1{
                 let tmpIndex = prevMonthDays - (firstweek - 1 - (i + 1))

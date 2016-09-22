@@ -105,7 +105,9 @@ class ExperienceViewController: BaseViewController {
     }
     //MARK: - 过滤
     @objc private func filterBtnClick(){
-        CJLog("filterBtnClick")
+        let filterVC = FilterViewController()
+        filterVC.cityCode = citycode
+        navigationController?.pushViewController(filterVC, animated: true)        
     }
 
     @objc private func loadExpData(){
@@ -231,6 +233,7 @@ class ExperienceViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
+//MARK: - UITableViewDataSource代理
 extension ExperienceViewController: UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -256,8 +259,11 @@ extension ExperienceViewController: UITableViewDataSource{
         return 305
     }
 }
+//MARK: - UITableViewDelegate代理
 extension ExperienceViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //释放选中效果
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         CJLog("didSelectRowAtIndexPath")
     }
 }

@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController {
         tableView.footer.hidden = true
     }
 
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let tv = UITableView(frame: self.view.bounds, style: .Plain)
         tv.registerClass(ETableViewNoTagCell.self, forCellReuseIdentifier: ECalendarTableBaseCellReuseIdentifier)
         tv.registerClass(ETableViewTagCell.self, forCellReuseIdentifier: ECalendarTableBaseTagCellReuseIdentifier)
@@ -148,6 +148,8 @@ extension CalendarViewController: UITableViewDataSource{
 }
 extension CalendarViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //释放选中效果
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         CJLog("didSelectRowAtIndexPath")
     }
 }

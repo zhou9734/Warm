@@ -13,6 +13,7 @@ class ExperienceViewModel: NSObject {
     var tags: [WTags] = [WTags]()
     var classes: [WClass] = [WClass]()
     var citys: [WCity] = [WCity]()
+    var areas: [WDict] = [WDict]()
 
     func resetData(){
         tags.removeAll()
@@ -89,6 +90,71 @@ class ExperienceViewModel: NSObject {
             }
             finished(data: data, error: error)
         }
-        
     }
+
+    func filterExperienceData(areacode: String?, citycode: String, page: Int, count: Int,sort: Int, tagid: Int?,finished: (data: AnyObject?, error: NSError?)->()){
+        unowned let tmpSelf = self
+        NetworkTools.sharedInstance.filterExperienceData(areacode, citycode: citycode, page: page, count: pageSize, sort: sort, tagid: tagid) { (data, error) -> () in
+            // 安全校验
+            if error != nil{
+                finished(data: nil, error: error)
+                return
+            }
+            guard let _classes = data as? [[String: AnyObject]] else{
+                return
+            }
+            for _class in _classes{
+                let cla = WClass(dict: _class)
+                cla.areatimeStr = "\(cla.area!) · \(NSDate.formatterData(cla.starttime, formatterStr: "MM月-dd日")) - \(NSDate.formatterData(cla.endtime, formatterStr: "MM月-dd日"))"
+                tmpSelf.classes.append(cla)
+            }
+            finished(data: data, error: error)
+        }
+
+    }
+
+    func loadAreasByCityCode(cityCode: String, finished: (data: AnyObject?, error: NSError?)->()){
+        unowned let tmpSelf = self
+        areas.removeAll()
+        NetworkTools.sharedInstance.loadAreasByCityCode(cityCode) { (data, error) -> () in
+            // 安全校验
+            if error != nil{
+                finished(data: nil, error: error)
+                return
+            }
+            guard let _areas = data as? [[String: AnyObject]] else{
+                return
+            }
+            for area in _areas{
+                let _area = WDict(dict: area)
+                tmpSelf.areas.append(_area)
+            }
+            let area = WDict(name: "所有地区", code: "999")
+            tmpSelf.areas.insert(area, atIndex: 0)
+            finished(data: data, error: error)
+        }
+    }
+
+    func loadDictDataByFile(fileName: String) -> [WDict]{
+        var dicts = [WDict]()
+        do{
+            let pathStr = NSBundle.mainBundle().pathForResource(fileName, ofType: "json")
+            let data = NSData(contentsOfFile: pathStr!)
+            let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
+
+            guard let datas = dict["result"] as? [[String : AnyObject]] else{
+                return dicts
+            }
+            for i in datas{
+                let _dict = WDict(dict: i)
+                dicts.append(_dict)
+            }
+            return dicts
+        }catch let error as NSError{
+            CJLog(error)
+            return dicts
+        }
+    }
+
+
 }

@@ -136,6 +136,8 @@ extension HomeViewController: UITableViewDataSource{
 }
 extension HomeViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //释放选中效果
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         CJLog("didSelectRowAtIndexPath")
     }
 }

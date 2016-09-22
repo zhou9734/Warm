@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7571EDB625863168500FFAF2 /* Pods_Warm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59D6D5899BFF06E21606B8EC /* Pods_Warm.framework */; };
+		F90297EE1D92C88E0040DC14 /* EPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90297ED1D92C88E0040DC14 /* EPopoverView.swift */; };
+		F90297F01D92C9110040DC14 /* EPopoverTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90297EF1D92C9110040DC14 /* EPopoverTableCell.swift */; };
+		F90297F21D92CB5F0040DC14 /* WDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90297F11D92CB5F0040DC14 /* WDict.swift */; };
+		F90297F61D92DEE00040DC14 /* TagType.json in Resources */ = {isa = PBXBuildFile; fileRef = F90297F51D92DEE00040DC14 /* TagType.json */; };
+		F90297F81D92DF5D0040DC14 /* SortType.json in Resources */ = {isa = PBXBuildFile; fileRef = F90297F71D92DF5D0040DC14 /* SortType.json */; };
+		F910BB691D929203007B9D8A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F910BB681D929203007B9D8A /* FilterViewController.swift */; };
 		F916B06A1D91082C00BF93B9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F916B0691D91082C00BF93B9 /* CalendarViewController.swift */; };
 		F92F952E1D8BFFA6005479A6 /* NewFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F952D1D8BFFA6005479A6 /* NewFeatureViewController.swift */; };
 		F92F95301D8BFFDE005479A6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92F952F1D8BFFDE005479A6 /* WelcomeViewController.swift */; };
@@ -138,6 +144,12 @@
 		57D5301D37D485B881261526 /* Pods-Warm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warm.release.xcconfig"; path = "Pods/Target Support Files/Pods-Warm/Pods-Warm.release.xcconfig"; sourceTree = "<group>"; };
 		59D6D5899BFF06E21606B8EC /* Pods_Warm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F54D8A3F9116DB147D2A67 /* Pods-Warm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Warm/Pods-Warm.debug.xcconfig"; sourceTree = "<group>"; };
+		F90297ED1D92C88E0040DC14 /* EPopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPopoverView.swift; sourceTree = "<group>"; };
+		F90297EF1D92C9110040DC14 /* EPopoverTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPopoverTableCell.swift; sourceTree = "<group>"; };
+		F90297F11D92CB5F0040DC14 /* WDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WDict.swift; sourceTree = "<group>"; };
+		F90297F51D92DEE00040DC14 /* TagType.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TagType.json; sourceTree = "<group>"; };
+		F90297F71D92DF5D0040DC14 /* SortType.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SortType.json; sourceTree = "<group>"; };
+		F910BB681D929203007B9D8A /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		F916B0691D91082C00BF93B9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F92F952D1D8BFFA6005479A6 /* NewFeatureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeatureViewController.swift; sourceTree = "<group>"; };
 		F92F952F1D8BFFDE005479A6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -515,6 +527,7 @@
 				F9FAA6FE1D86DBE800063255 /* ExperienceViewController.swift */,
 				F9FE96B81D90319D0002993A /* ChoseCityViewController.swift */,
 				F916B0691D91082C00BF93B9 /* CalendarViewController.swift */,
+				F910BB681D929203007B9D8A /* FilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -525,6 +538,7 @@
 				F9F17C611D89844B0058663B /* WTags.swift */,
 				F9F17C631D89858F0058663B /* WClass.swift */,
 				F9FE96B61D9030CC0002993A /* WCity.swift */,
+				F90297F11D92CB5F0040DC14 /* WDict.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -539,6 +553,8 @@
 				F9C087771D8CF861005E1E13 /* ETableViewTagCell.swift */,
 				F99DFD421D9186FC0077CAE9 /* ECalendarScrollView.swift */,
 				F99DFD431D9186FC0077CAE9 /* ECalendarView.swift */,
+				F90297ED1D92C88E0040DC14 /* EPopoverView.swift */,
+				F90297EF1D92C9110040DC14 /* EPopoverTableCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -752,6 +768,8 @@
 				F9FAA7141D86F1F800063255 /* ExperienceRightBtnDetail.json */,
 				F9FAA7161D86F24200063255 /* ExperienceDetail.json */,
 				F9FE96B41D9030140002993A /* City.json */,
+				F90297F51D92DEE00040DC14 /* TagType.json */,
+				F90297F71D92DF5D0040DC14 /* SortType.json */,
 			);
 			path = Experience;
 			sourceTree = "<group>";
@@ -888,8 +906,10 @@
 			files = (
 				F9FAA70B1D86E8CB00063255 /* Recommend.json in Resources */,
 				F9FAA7131D86F00300063255 /* ExperienceRightBarBtn.json in Resources */,
+				F90297F61D92DEE00040DC14 /* TagType.json in Resources */,
 				F9EAB4871D8FF10C008D8BFE /* Setting.json in Resources */,
 				F9FAA70F1D86ED8E00063255 /* Message.json in Resources */,
+				F90297F81D92DF5D0040DC14 /* SortType.json in Resources */,
 				F9FAA7071D86E2FC00063255 /* Home.json in Resources */,
 				F97202F01D86AC93009B61C2 /* Assets.xcassets in Resources */,
 				F9FAA7151D86F1F800063255 /* ExperienceRightBtnDetail.json in Resources */,
@@ -994,12 +1014,14 @@
 				F99AAEBC1D8E7FCD00CFFF83 /* SettingViewController.swift in Sources */,
 				F97163A21D88015A00624EF7 /* MJRefreshGifHeader.m in Sources */,
 				F9FAA6FD1D86DBDA00063255 /* HomeViewController.swift in Sources */,
+				F90297EE1D92C88E0040DC14 /* EPopoverView.swift in Sources */,
 				F972034E1D86BD63009B61C2 /* MainViewController.swift in Sources */,
 				F972033E1D86B3B2009B61C2 /* Debugging.swift in Sources */,
 				F963A9371D87A2A700CE6EB8 /* NetworkTools.swift in Sources */,
 				F9D20A881D8D7115009F9F4C /* MeViewModel.swift in Sources */,
 				F97163A01D88015A00624EF7 /* MJRefreshBackNormalFooter.m in Sources */,
 				F972033F1D86B3B2009B61C2 /* EdgeInsets.swift in Sources */,
+				F90297F21D92CB5F0040DC14 /* WDict.swift in Sources */,
 				F9FE96B31D902C030002993A /* DetailViewController.swift in Sources */,
 				F967C3761D8F8A2400496B87 /* MsgDetailViewController.swift in Sources */,
 				F99DFD441D9186FC0077CAE9 /* ECalendarScrollView.swift in Sources */,
@@ -1026,6 +1048,7 @@
 				F9A758BC1D8D483300134E25 /* MeTableHeadView.swift in Sources */,
 				F9F17C601D8980A10058663B /* EPageScrollView.swift in Sources */,
 				F963A9391D87A3C800CE6EB8 /* WRound.swift in Sources */,
+				F90297F01D92C9110040DC14 /* EPopoverTableCell.swift in Sources */,
 				F99AAEBE1D8E806900CFFF83 /* SettingHeaderView.swift in Sources */,
 				F9D20A861D8D679D009F9F4C /* WMenu.swift in Sources */,
 				F97163A91D88015A00624EF7 /* UIView+MJExtension.m in Sources */,
@@ -1057,6 +1080,7 @@
 				F96F1A3F1D8EE55C0045ED8E /* CustomButton.swift in Sources */,
 				F97203421D86B3B2009B61C2 /* View+SnapKit.swift in Sources */,
 				F916B06A1D91082C00BF93B9 /* CalendarViewController.swift in Sources */,
+				F910BB691D929203007B9D8A /* FilterViewController.swift in Sources */,
 				F97163971D88015A00624EF7 /* MJRefreshAutoFooter.m in Sources */,
 				F9F17C681D898ADA0058663B /* ETableViewBaseCell.swift in Sources */,
 				F99AAEBA1D8E492F00CFFF83 /* MeTableFooterView.swift in Sources */,
