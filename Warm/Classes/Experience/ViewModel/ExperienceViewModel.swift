@@ -92,7 +92,7 @@ class ExperienceViewModel: NSObject {
         }
     }
 
-    func filterExperienceData(areacode: String?, citycode: String, page: Int, count: Int,sort: Int, tagid: Int?,finished: (data: AnyObject?, error: NSError?)->()){
+    func filterExperienceData(areacode: Int64?, citycode: String, page: Int, count: Int,sort: Int64, tagid: Int64?,finished: (data: AnyObject?, error: NSError?)->()){
         unowned let tmpSelf = self
         NetworkTools.sharedInstance.filterExperienceData(areacode, citycode: citycode, page: page, count: pageSize, sort: sort, tagid: tagid) { (data, error) -> () in
             // 安全校验
@@ -129,7 +129,7 @@ class ExperienceViewModel: NSObject {
                 let _area = WDict(dict: area)
                 tmpSelf.areas.append(_area)
             }
-            let area = WDict(name: "所有地区", code: "999")
+            let area = WDict(name: "所有地区", code: 999)
             tmpSelf.areas.insert(area, atIndex: 0)
             finished(data: data, error: error)
         }

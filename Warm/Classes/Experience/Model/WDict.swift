@@ -10,8 +10,8 @@ import UIKit
 
 class WDict: NSObject {
     var name: String?
-    var code: String?
-    init(name: String, code: String?) {
+    var code: Int64 = -1
+    init(name: String, code: Int64) {
         self.name = name
         self.code = code
     }

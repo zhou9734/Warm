@@ -1,0 +1,13 @@
+// http://api.mid.warmup.cc/api/v6/salon/recommends?citycode=440100&count=10&page=1&type=2
+//salons : 最下面的tableView数据
+//rounds : 顶部循环滚动图片
+//recommends :  取暖精选
+//获取下一页只需要把url地址中的page加一即可
+//点击轮播图片进入专题 http://api.mid.warmup.cc/api/v6/subject/18
+//某一个专题的url  http://api.mid.warmup.cc/api/v6/classes/1873
+//话题 http://api.mid.warmup.cc/api/v6/salon/449/app
+
+// http://api.mid.warmup.cc/api/v6/msgs/users/notread
+//话题: http://api.mid.warmup.cc/api/v6/msgs/salons?count=20&page=1
+//官方: http://api.mid.warmup.cc/api/v6/msgs/system?count=20&page=1
+//体验: http://api.mid.warmup.cc/api/v6/msgs/classes?count=20&page=1

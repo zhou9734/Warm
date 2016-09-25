@@ -38,6 +38,7 @@ class WSalon: NSObject {
     var share: WShare?
     var talk_about_divider: String?
     var user: WUser?
+    var content: [String] = [String]()
 
     init(dict: [String: AnyObject]) {
         super.init()
@@ -56,6 +57,13 @@ class WSalon: NSObject {
                 return
             }
             user = WUser(dict: _data as! [String: AnyObject])
+            return
+        }
+        if key == "content"{
+            guard let datas = value as? [String] else{
+                return
+            }
+            content = datas
             return
         }
         super.setValue(value, forKey: key)

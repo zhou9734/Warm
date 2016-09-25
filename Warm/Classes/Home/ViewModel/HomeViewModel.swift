@@ -56,4 +56,50 @@ class HomeViewModel: NSObject {
             finished(data: data, error: error)
         }
     }
+
+    //MARK: - 获得专题数据
+    func loadSubjectDetail(subjectId: Int64, finished: (data: AnyObject?, error: NSError?)->()){
+        NetworkTools.sharedInstance.loadSubjectDetail(subjectId) { (data, error) -> () in
+            // 安全校验
+            if error != nil{
+                finished(data: nil, error: error)
+                return
+            }
+            guard let _rdata = data as? [String: AnyObject] else{
+                return
+            }
+            let rdata = WRdata(dict: _rdata)
+            finished(data: rdata, error: nil)
+        }
+    }
+    //MARK: - 获得话题详情
+    func loadSalonDetail(salonId: Int64,finished: (data: AnyObject?, error: NSError?)->()){
+        NetworkTools.sharedInstance.loadSalonDetail(salonId) { (data, error) -> () in
+            // 安全校验
+            if error != nil{
+                finished(data: nil, error: error)
+                return
+            }
+            guard let _salon = data as? [String: AnyObject] else{
+                return
+            }
+            let salon = WSalon(dict: _salon)
+            finished(data: salon, error: nil)
+        }
+    }
+    //MARK: - 获得某一个专题
+    func loadClassesDetail(classesid: Int64, finished: (data: AnyObject?, error: NSError?)->()){
+        NetworkTools.sharedInstance.loadClassesDetail(classesid) { (data, error) -> () in
+            // 安全校验
+            if error != nil{
+                finished(data: nil, error: error)
+                return
+            }
+            guard let _class = data as? [String: AnyObject] else{
+                return
+            }
+            let classes = WClass(dict: _class)
+            finished(data: classes, error: nil)
+        }
+    }
 }

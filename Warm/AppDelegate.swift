@@ -38,9 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //一般情况下全局性的东西要在AppDelegate设置
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().tintColor =  Color_GlobalBackground
         UITabBar.appearance().tintColor = WarmBlueColor
-        UINavigationBar.appearance().barStyle = .Default
         //注册监听
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("switchRootViewController:"), name: SwitchRootViewController, object: nil)
         // 创建窗口
@@ -100,6 +99,5 @@ extension AppDelegate{
         }
         return false
     }
-
 }
 

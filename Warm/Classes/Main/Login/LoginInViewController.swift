@@ -39,6 +39,7 @@ class LoginInViewController: UIViewController {
         view.addSubview(visiableBtn)
         view.addSubview(forgetPwdBtn)
         view.addSubview(loginBtn)
+        view.addSubview(descLbl)
     }
     private lazy var backBtn: UIButton = {
         let btn = UIButton()
@@ -117,6 +118,17 @@ class LoginInViewController: UIViewController {
         btn.addTarget(self, action: Selector("loginBtnClick"), forControlEvents: .TouchUpInside)
         return btn
     }()
+
+    private lazy var descLbl: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "用户名和密码都是123"
+        lbl.textColor = UIColor.grayColor()
+        lbl.textAlignment = .Right
+        lbl.font = UIFont.systemFontOfSize(15)
+        lbl.frame = CGRect(x: self.marginLeft, y: 325, width: self._width, height: 20.0)
+        return lbl
+    }()
+
     @objc private func hasText(){
         if usernameTxtField.hasText() && pwdTxtField.hasText() {
             loginBtn.enabled = true

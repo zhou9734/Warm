@@ -150,7 +150,10 @@ extension CalendarViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //释放选中效果
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        CJLog("didSelectRowAtIndexPath")
+        let _class = experienceViewModel.classes[indexPath.row]
+        let classesVC = ClassesViewController()
+        classesVC.classesId = _class.id
+        navigationController?.pushViewController(classesVC, animated: true)
     }
 }
 

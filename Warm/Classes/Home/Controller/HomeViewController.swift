@@ -19,6 +19,11 @@ class HomeViewController: BaseViewController {
         setupUI()
         setupRefresh()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //隐藏navigationBar
+        navigationController?.navigationBarHidden = false
+    }
     //设置组件
     private func setupUI(){
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBtn)
@@ -95,13 +100,22 @@ class HomeViewController: BaseViewController {
         guard let index = notice.userInfo!["index"] as? Int else{
             return
         }
-        CJLog(index)
+        let round = homeViewModel.rounds[index]
+        let subjectVC = SubjectViewController()
+        let id = round.rdata?.id
+        if id == -1 {
+            return
+        }
+        subjectVC.subid = id
+        navigationController?.pushViewController(subjectVC, animated: true)
     }
     @objc private func recommendImageClick(notice: NSNotification){
         guard let index = notice.userInfo!["index"] as? Int else{
             return
         }
-        CJLog(index)
+        let classesVC = ClassesViewController()
+        classesVC.classesId = Int64(index)
+        navigationController?.pushViewController(classesVC, animated: true)
     }
 
     private func isLogin() -> Bool{
@@ -138,6 +152,9 @@ extension HomeViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //释放选中效果
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        CJLog("didSelectRowAtIndexPath")
+        let salon = homeViewModel.salons[indexPath.row]
+        let salonVC = SalonViewController()
+        salonVC.salonId = salon.id
+        navigationController?.pushViewController(salonVC, animated: true)
     }
 }

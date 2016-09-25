@@ -25,7 +25,7 @@ class EPopoverTableCell: UITableViewCell {
             }
         }
     }
-    var selectedKey: String?
+    var selectedKey: Int64?
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -59,4 +59,7 @@ class EPopoverTableCell: UITableViewCell {
         return iv
     }()
 
+    func resetLbl(){
+        iconImageView.hidden = true
+    }
 }

@@ -79,7 +79,7 @@ class WRecommendData: NSObject {
     }
     override func setValue(value: AnyObject?, forKey key: String) {
         if key == "description"{
-            desc = "\(value)"
+            desc = "\(value!)"
             return
         }
         super.setValue(value, forKey: key)

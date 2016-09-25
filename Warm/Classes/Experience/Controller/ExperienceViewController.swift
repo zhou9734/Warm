@@ -30,7 +30,11 @@ class ExperienceViewController: BaseViewController {
         setupUI()
         setupRefresh()
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //隐藏navigationBar
+        navigationController?.navigationBarHidden = false
+    }
     override func viewWillDisappear(animated: Bool) {
         //停止更新定位
         locationManager.stopUpdatingLocation()
@@ -145,15 +149,20 @@ class ExperienceViewController: BaseViewController {
         guard let index = notice.userInfo!["index"] as? Int else{
             return
         }
-        CJLog(index)
+        let tag = experienceViewModel.tags[index]
+        let etopicVC = ETopicViewController()
+        etopicVC.tagid = tag.tagid
+        etopicVC.tagName = tag.tag?.name
+        etopicVC.citycode = citycode
+        navigationController?.pushViewController(etopicVC, animated: true)
     }
 
-    @objc private func classesImageClick(notice: NSNotification){
-        guard let index = notice.userInfo!["index"] as? Int else{
-            return
-        }
-        CJLog(index)
-    }
+//    @objc private func classesImageClick(notice: NSNotification){
+//        guard let index = notice.userInfo!["index"] as? Int else{
+//            return
+//        }
+//        CJLog(index)
+//    }
     private func isLogin() -> Bool{
         if !Token.isLogin() {
             NSNotificationCenter.defaultCenter().postNotificationName(LoginNotication, object: self)
@@ -264,7 +273,10 @@ extension ExperienceViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //释放选中效果
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        CJLog("didSelectRowAtIndexPath")
+        let _class = experienceViewModel.classes[indexPath.row]
+        let classesVC = ClassesViewController()
+        classesVC.classesId = _class.id
+        navigationController?.pushViewController(classesVC, animated: true)
     }
 }
 extension ExperienceViewController: CLLocationManagerDelegate{

@@ -7,12 +7,18 @@
 //
 import UIKit
 
+/// 友盟分享的APP key
+let UMSharedAPPKey = "57e7e25767e58e33190022db"
+//新浪App Key
+let SinaAppKey = "1168605738"
+let SinaAppSecret = "968fb67661aa1e811e171a6937a699c0"
+//重定向url
+let RedirectURL = "https://www.baidu.com/"
 // 全局背景
 let Color_GlobalBackground = UIColor.whiteColor()
-let Color_NavBackground = UIColor(red: 42.0/255.0, green: 42.0/255.0, blue: 42.0/255.0, alpha: 1.0)
-let placeholderImage: UIImage = UIImage(named: "ColorCover_375x200_")!
+let placeholderImage: UIImage = UIImage(named: "CoursePlaceholder_375x240_")!
 let WarmBlueColor = UIColor(red: 87.0/255.0, green: 192.0/255.0, blue: 255.0/255.0, alpha: 1)
-let SpliteColor = UIColor(red: 215.0/255.0, green: 213.0/255.0, blue: 218.0/255.0, alpha: 1.0)
+let SpliteColor = UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 250.0/255.0, alpha: 1)
 let ScreenWidth = UIScreen.mainScreen().bounds.width
 let ScreenHeight = UIScreen.mainScreen().bounds.height
 let ScreenBounds = UIScreen.mainScreen().bounds

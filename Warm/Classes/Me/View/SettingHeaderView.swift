@@ -61,7 +61,4 @@ class SettingHeaderView: UIView {
         btn.frame = CGRect(x: ScreenWidth - 28, y: 40.0, width: 17.0, height: 17.0)
         return btn
     }()
-    
-
-
 }

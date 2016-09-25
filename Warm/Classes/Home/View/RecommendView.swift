@@ -31,7 +31,7 @@ class RecommendView: UIView {
         for i in 0..<recommends.count{
             let imageView = UIImageView()
             imageView.userInteractionEnabled = true
-            imageView.tag = i
+            imageView.tag = Int((recommends[i].rdata?.id)!)
             let tap = UITapGestureRecognizer(target: self, action: "imageViewClick:")
             imageView.addGestureRecognizer(tap)
             imageView.frame = CGRect(x: marginRight + CGFloat(i) * imageW + CGFloat(i) * marginRight, y: 0, width: imageW, height: frame.height)

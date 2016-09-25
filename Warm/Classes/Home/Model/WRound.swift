@@ -77,6 +77,12 @@ class WRdata: NSObject {
     var created_at: Int64 = -1
     //更新时间
     var updated_at: Int64 = -1
+    //分享地址
+    var share_url: String?
+    //内容
+    var content: String?
+    var itmes: [WItem]?
+    var liked: Bool = false
     override init() {
         super.init()
     }
@@ -84,11 +90,21 @@ class WRdata: NSObject {
         super.init()
         setValuesForKeysWithDictionary(dict)
     }
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
+    override func setValue(value: AnyObject?, forKey key: String) {
+        if "items" == key{
+            guard let _data = value as? [[String: AnyObject]] else{
+                return
+            }
+            var _itmes = [WItem]()
+            for i in _data{
+                let _item = WItem(dict: i)
+                _itmes.append(_item)
+            }
+            itmes = _itmes
+            return
+        }
+        super.setValue(value, forKey: key)
     }
-    override var description : String {
-        let pops = ["id", "title", "avatar", "like_count", "created_at", "updated_at"]
-        let dict = dictionaryWithValuesForKeys(pops)
-        return "\(dict)"
+    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
     }
 }

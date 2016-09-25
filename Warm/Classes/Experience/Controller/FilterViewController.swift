@@ -10,24 +10,22 @@ import UIKit
 
 let EFilterTableBaseCellReuseIdentifier = "EFilterTableBaseCellReuseIdentifier"
 let EFilterTableBaseTagCellReuseIdentifier = "EFilterTableBaseTagCellReuseIdentifier"
-let ClosePopoverView = "ClosePopoverView"
 let FilterExprienceData = "FilterExprienceData"
-
+let ChageHeadView = "ChageHeadView"
 class FilterViewController: UIViewController {
     var experienceViewModel = ExperienceViewModel()
     var cityCode: String?
-    var areaCode: String = "999"
+    var areaCode: Int64 = 999
     var page = 1
-    var sortType = 1
-    var tagid: Int = 999
-    var popoverView = EPopoverView()
+    var sortType: Int64 = 1
+    var tagid: Int64 = 999
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "体验"
         setupUI()
         setupRefresh()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:    Selector("closePopover:"), name: ClosePopoverView, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("filterExprienceData:"), name: FilterExprienceData, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("chageHeadView:"), name: ChageHeadView, object: nil)
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,16 +37,16 @@ class FilterViewController: UIViewController {
     }
     private func setupUI(){
         view.backgroundColor = UIColor.whiteColor()
-        view.addSubview(typeBtn)
-        view.addSubview(leftSpliteView)
-        view.addSubview(areaBtn)
-        view.addSubview(rightSpliteView)
-        view.addSubview(sortBtn)
         view.addSubview(tableView)
+        headerView.cityCode = cityCode
+        headerView.experienceViewModel = experienceViewModel
+        noDataView.hidden = true
+        view.addSubview(noDataView)
+        view.addSubview(headerView)
     }
 
     private lazy var tableView: UITableView = {
-        let tv = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: 109), size: ScreenBounds.size), style: .Plain)
+        let tv = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: 50), size: ScreenBounds.size), style: .Plain)
         tv.registerClass(ETableViewNoTagCell.self, forCellReuseIdentifier: EFilterTableBaseCellReuseIdentifier)
         tv.registerClass(ETableViewTagCell.self, forCellReuseIdentifier: EFilterTableBaseTagCellReuseIdentifier)
         tv.dataSource = self
@@ -56,45 +54,10 @@ class FilterViewController: UIViewController {
         tv.backgroundColor = UIColor.whiteColor()
         return tv
     }()
-    let btnWidth: CGFloat =  (ScreenWidth - 2) / 3
-    private lazy var typeBtn: CustomButton = {
-        let btn = CustomButton()
-        btn.setTitle("所有类别", forState: .Normal)
-        btn.titleLabel?.textAlignment = .Center
-        btn.frame = CGRect(x: 0 , y: 64, width: self.btnWidth, height: 45.0)
-        btn.tag = 1
-        btn.addTarget(self, action: Selector("openPopoverView:"), forControlEvents: .TouchUpInside)
-        return btn
-    }()
-    private lazy var leftSpliteView : UIView = {
-        let v = UIView(frame: CGRect(x: self.btnWidth, y: 64, width: 1.0, height: 45.0))
-        v.backgroundColor = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
-        return v
-    }()
-
-    private lazy var areaBtn: CustomButton = {
-        let btn = CustomButton()
-        btn.setTitle("所有地区", forState: .Normal)
-        btn.frame = CGRect(x: self.btnWidth + 1 , y: 64, width: self.btnWidth, height: 45.0)
-        btn.titleLabel?.textAlignment = .Center
-        btn.tag = 2
-        btn.addTarget(self, action: Selector("openPopoverView:"), forControlEvents: .TouchUpInside)
-        return btn
-    }()
-    private lazy var rightSpliteView : UIView = {
-        let v = UIView(frame: CGRect(x: self.btnWidth * 2 + 1, y: 64, width: 1.0, height: 45.0))
-        v.backgroundColor = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
-        return v
-    }()
-    private lazy var sortBtn: CustomButton = {
-        let btn = CustomButton()
-        btn.setTitle("最新", forState: .Normal)
-        btn.frame = CGRect(x: (self.btnWidth + 1) * 2 , y: 64, width: self.btnWidth, height: 45.0)
-        btn.titleLabel?.textAlignment = .Center
-        btn.tag = 3
-        btn.addTarget(self, action: Selector("openPopoverView:"), forControlEvents: .TouchUpInside)
-        return btn
-    }()
+    //顶部条件视图
+    private lazy var headerView = EFilterHeadView(frame: CGRect(x: 0 , y: 64, width: ScreenWidth, height: 45.0))
+    //没有找到数据视图
+    private lazy var noDataView = EFindDataView(frame: CGRect(origin: CGPoint(x: 0, y: 98), size: ScreenBounds.size))
     private func setupRefresh(){
         tableView.header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: Selector("loadExpData"))
         tableView.header.beginRefreshing()
@@ -128,64 +91,39 @@ class FilterViewController: UIViewController {
             finished()
             tmpSelf.page = tmpSelf.page + 1
             tmpSelf.tableView.reloadData()
-        }
-    }
-
-    @objc private func openPopoverView(btn: UIButton){
-        if btn.selected {
-            popoverView.hide()
-            btn.selected = false
-            return
-        }
-        if btn.tag == 1 {
-            popoverView.filterType = btn.tag
-            popoverView.selectedKey = "\(tagid)"
-            popoverView.data = experienceViewModel.loadDictDataByFile("TagType")
-            popoverView.showInView(view)
-        }else if btn.tag == 2{
-            unowned let tmpSelf = self
-            experienceViewModel.loadAreasByCityCode(cityCode!, finished: { (data, error) -> () in
-                tmpSelf.popoverView.selectedKey = tmpSelf.areaCode
-                tmpSelf.popoverView.filterType = btn.tag
-                tmpSelf.popoverView.data = tmpSelf.experienceViewModel.areas
-                tmpSelf.popoverView.showInView(tmpSelf.view)
-            })
-        }else if btn.tag == 3{
-            popoverView.selectedKey = "\(sortType)"
-            popoverView.filterType = btn.tag
-            popoverView.data = experienceViewModel.loadDictDataByFile("SortType")
-            popoverView.showInView(view)
-        }
-        btn.selected = true
-    }
-
-    @objc private func closePopover(notice: NSNotification){
-        if let filterType = notice.object as? Int {
-            if filterType == 1{
-                typeBtn.selected = false
-            }else if filterType == 2{
-                areaBtn.selected = false
-            }else if filterType == 3{
-                sortBtn.selected = false
+            if tmpSelf.experienceViewModel.classes.count == 0{
+                tmpSelf.noDataView.hidden = false
+            }else{
+                tmpSelf.noDataView.hidden = true
             }
         }
     }
+
+    @objc private func chageHeadView(notice: NSNotification){
+        guard let isShow = notice.object as? Bool else{
+            return
+        }
+        var rect = CGRect(x: 0 , y: 64, width: ScreenWidth, height: 45.0)
+        if isShow {
+            rect = CGRect(origin: CGPoint(x: 0, y: 64), size: ScreenBounds.size)
+        }
+        headerView.frame = rect
+    }
+
     @objc private func filterExprienceData(notice: NSNotification){
         //刷新
-        guard let code = notice.userInfo!["code"] as? Int else{
+        guard let codeStr = notice.userInfo!["code"] as? String else{
             return
         }
-        guard let type = notice.userInfo!["type"] as? Int else{
+        guard let typeStr = notice.userInfo!["type"] as? String else{
             return
         }
+        let type = Int64(typeStr)!
+        let code = Int64(codeStr)!
         if type == 1{
-            if code != 999{
-                tagid = code
-            }
+            tagid = code
         }else if type == 2{
-            if code != 999{
-                areaCode = "\(code)"
-            }
+            areaCode = code
         }else if type == 3{
             sortType = code
         }
@@ -227,6 +165,9 @@ extension FilterViewController: UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //释放选中效果
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        CJLog("didSelectRowAtIndexPath")
+        let _class = experienceViewModel.classes[indexPath.row]
+        let classesVC = ClassesViewController()
+        classesVC.classesId = _class.id
+        navigationController?.pushViewController(classesVC, animated: true)
     }
 }
