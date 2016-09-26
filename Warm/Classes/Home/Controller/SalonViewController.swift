@@ -70,7 +70,7 @@ class SalonViewController: UIViewController {
         btn.selected = !btn.selected
     }
     @objc func shareBtnClick(){
-        CJLog("shareBtnClick")
+        ShareTools.shareApp(self, shareText: nil)
     }
 }
 extension SalonViewController: UIScrollViewDelegate{

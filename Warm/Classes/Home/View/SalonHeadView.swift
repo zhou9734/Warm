@@ -15,7 +15,10 @@ class SalonHeadView: UIView {
                 return
             }
             iconImage.sd_setImageWithURL(NSURL(string: _user.avatar!), placeholderImage: placeholderImage)
+            let nicknameLblWidth = nicknameLbl.getWidthWithTitle(_user.nickname!, font: nicknameLbl.font)
             nicknameLbl.text = _user.nickname
+            nicknameLbl.frame = CGRect(x: 85.0, y: 20.0, width: nicknameLblWidth, height: 20.0)
+            tagImageView.frame = CGRect(x: 85.0 + nicknameLblWidth, y: 20.0, width: 67.0, height: 18.0)
             descLbl.text = _user.signature ?? "简介: 暂无"
             tagImageView.hidden = false
         }

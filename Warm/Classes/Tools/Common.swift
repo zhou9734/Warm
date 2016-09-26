@@ -9,6 +9,10 @@ import UIKit
 
 /// 友盟分享的APP key
 let UMSharedAPPKey = "57e7e25767e58e33190022db"
+//微信
+//AppId
+let WXAppId = "wx6ace5c4cd4178656"
+let WXAppSerect = "488762a888d20c50119b104921b0e4ff"
 //新浪App Key
 let SinaAppKey = "1168605738"
 let SinaAppSecret = "968fb67661aa1e811e171a6937a699c0"

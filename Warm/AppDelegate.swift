@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = WarmBlueColor
         //注册监听
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("switchRootViewController:"), name: SwitchRootViewController, object: nil)
+        //友盟分享
+        shareApp()
         // 创建窗口
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = defaultsVC()
@@ -53,6 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.setObject("440100", forKey: cityCodeKey)
         }
         return true
+    }
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        let result = UMSocialSnsService.handleOpenURL(url)
+        if !result {
+            //调用其他SDK，例如支付宝SDK等
+        }
+        return result
     }
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -98,6 +107,15 @@ extension AppDelegate{
             return true
         }
         return false
+    }
+
+    private func shareApp(){
+        // 设置友盟的APPKEY
+        UMSocialData.setAppKey(UMSharedAPPKey)
+        // 打开新浪微博的SSO开关
+        UMSocialSinaHandler.openSSOWithRedirectURL("http://sns.whalecloud.com/sina2/callback")
+        //设置微信AppId，设置分享url，默认使用友盟的网址
+        UMSocialWechatHandler.setWXAppId(WXAppId, appSecret: WXAppSerect, url: "http://www.umeng.com/social")
     }
 }
 

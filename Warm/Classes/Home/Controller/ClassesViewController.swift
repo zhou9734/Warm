@@ -131,7 +131,7 @@ class ClassesViewController: UIViewController {
         btn.selected = !btn.selected
     }
     @objc func shareBtnClick(){
-        CJLog("shareBtnClick")
+        ShareTools.shareApp(self, shareText: nil)
     }
     @objc private func backBtnClick(){
         navigationController?.popViewControllerAnimated(true)

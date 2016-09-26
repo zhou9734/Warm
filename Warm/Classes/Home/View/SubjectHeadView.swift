@@ -15,6 +15,7 @@ class SubjectHeadView: UIView {
                 return
             }
             contentWebView.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+            layoutIfNeeded()
         }
     }
     var titleStrng: String?{
@@ -73,4 +74,8 @@ class SubjectHeadView: UIView {
         wv.scrollView.scrollEnabled = false
         return wv
     }()
+    deinit{
+        contentWebView.delegate = nil
+        contentWebView.stopLoading()
+    }
 }

@@ -20,15 +20,14 @@ class SubjectViewController: UIViewController {
                 SVProgressHUD.showErrorWithStatus("参数传递错误")
                 return
             }
+            SVProgressHUD.show()
             unowned let tmpSelf = self
             homeViewModel.loadSubjectDetail(_subid) { (data, error) -> () in
                 guard let _rdata = data as? WRdata else {
                     return
                 }
                 tmpSelf.rdata = _rdata
-                tmpSelf.tableHeadView.titleStrng = _rdata.title
-                tmpSelf.tableHeadView.urlString = _rdata.content
-                tmpSelf.tableView.reloadData()
+                tmpSelf.tmpWebView.loadRequest(NSURLRequest(URL: NSURL(string: _rdata.content!)!))
             }
         }
     }
@@ -57,18 +56,29 @@ class SubjectViewController: UIViewController {
         tv.registerClass(SubjectClassesTableViewCell.self, forCellReuseIdentifier: SubjectClassesTableReuseIdentifier)
         tv.dataSource = self
         tv.delegate = self
-        tv.tableHeaderView = self.tableHeadView
+//        tv.tableHeaderView = self.tableHeadView
         tv.separatorStyle = .None
         return tv
     }()
 
-    private lazy var tableHeadView: SubjectHeadView = SubjectHeadView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight * 0.7))
+    private lazy var tableHeadView: SubjectHeadView = SubjectHeadView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: 2))
 
+    private lazy var tmpWebView: UIWebView = {
+        let wv = UIWebView(frame: CGRectMake(0, 0, self.view.frame.size.width, 2))
+        wv.alpha = 0
+        wv.delegate = self
+        wv.sizeToFit()
+        return wv
+    }()
     @objc func loveBtnClick(btn: UIButton){
         btn.selected = !btn.selected
     }
     @objc func shareBtnClick(){
-        CJLog("shareBtnClick")
+        ShareTools.shareApp(self, shareText: nil)
+    }
+    deinit{
+        tmpWebView.delegate = nil
+        tmpWebView.stopLoading()
     }
 }
 //MARK: - UITableViewDataSource代理
@@ -119,3 +129,26 @@ extension SubjectViewController: UITableViewDelegate{
         }
     }
 }
+extension SubjectViewController: UIWebViewDelegate{
+    func webViewDidFinishLoad(webView: UIWebView) {
+        //客户端高度
+        let str = "document.body.offsetHeight"
+        let clientheightStr = webView.stringByEvaluatingJavaScriptFromString(str)
+        let height = CGFloat((clientheightStr! as NSString).floatValue) + 80
+        //移除多余的webView
+        tmpWebView.removeFromSuperview()
+
+        tableHeadView.frame = CGRect(x: 0, y: 0,  width: ScreenWidth, height: height)
+        guard let data = rdata else{
+            SVProgressHUD.dismiss()
+            alert("获取数据失败")
+            return
+        }
+        tableHeadView.titleStrng = data.title
+        tableHeadView.urlString = data.content
+        tableView.tableHeaderView = tableHeadView
+        tableView.reloadData()
+        SVProgressHUD.dismiss()
+    }
+}
+

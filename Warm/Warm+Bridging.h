@@ -7,3 +7,6 @@
 //
 #import "MJRefresh.h"
 #import "UIImage+ImageEffects.h"
+#import "UMSocial.h"
+#import "UMSocialSinaHandler.h"
+#import "UMSocialWechatHandler.h"
