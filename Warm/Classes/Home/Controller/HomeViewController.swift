@@ -101,13 +101,12 @@ class HomeViewController: BaseViewController {
             return
         }
         let round = homeViewModel.rounds[index]
-        let subjectVC = SubjectViewController()
         let id = round.rdata?.id
-        if id == -1 {
-            return
+        if id != -1 {
+            let subjectVC = SubjectViewController()
+            subjectVC.subid = id
+            navigationController?.pushViewController(subjectVC, animated: true)
         }
-        subjectVC.subid = id
-        navigationController?.pushViewController(subjectVC, animated: true)
     }
     @objc private func recommendImageClick(notice: NSNotification){
         guard let index = notice.userInfo!["index"] as? Int else{

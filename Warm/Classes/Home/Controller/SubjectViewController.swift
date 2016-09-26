@@ -35,6 +35,11 @@ class SubjectViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //隐藏navigationBar
+        navigationController?.navigationBarHidden = false
+    }
     private func setupUI(){
         view.backgroundColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: shareBtn), UIBarButtonItem(customView: loveBtn)]
