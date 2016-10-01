@@ -42,7 +42,7 @@ class SubjectHeadView: UIView {
             make.right.equalTo(self.snp_right).offset(-10)
         }
         spliteView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(titleLbl.snp_top).offset(10)
+            make.top.equalTo(titleLbl.snp_bottom).offset(10)
             make.left.equalTo(self.snp_left).offset(10)
             make.height.equalTo(1)
             make.width.equalTo(70)

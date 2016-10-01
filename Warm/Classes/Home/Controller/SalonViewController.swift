@@ -72,6 +72,12 @@ class SalonViewController: UIViewController {
     @objc func shareBtnClick(){
         ShareTools.shareApp(self, shareText: nil)
     }
+    @objc func editBtnClick(){
+        CJLog("edit")
+    }
+    deinit{
+        SVProgressHUD.dismiss()
+    }
 }
 extension SalonViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(scrollView: UIScrollView) {

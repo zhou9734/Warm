@@ -45,7 +45,7 @@ class RecommendView: UIView {
     private func updateData(){
         for i in 0..<recommends.count{
             let iv = subviews[i] as! UIImageView
-            guard let url = recommends[i].rdata!.images else{
+            guard let url = recommends[i].data?.avatar else{
                 continue
             }
             iv.sd_setImageWithURL(NSURL(string: url), placeholderImage: placeholderImage)

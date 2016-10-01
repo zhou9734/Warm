@@ -144,7 +144,7 @@ extension HomeViewController: UITableViewDataSource{
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 245
+        return 235
     }
 }
 extension HomeViewController: UITableViewDelegate{

@@ -84,6 +84,7 @@ class SubjectViewController: UIViewController {
     deinit{
         tmpWebView.delegate = nil
         tmpWebView.stopLoading()
+        SVProgressHUD.dismiss()
     }
 }
 //MARK: - UITableViewDataSource代理

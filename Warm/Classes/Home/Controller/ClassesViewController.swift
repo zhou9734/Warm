@@ -154,9 +154,12 @@ class ClassesViewController: UIViewController {
         loveBtn.setBackgroundImage(UIImage(named: "navigationLoveNormal_22x20_"), forState: .Normal)
         loveBtn.setBackgroundImage(UIImage(named: "navigation_liked_22x22_"), forState: .Selected)
         shareBtn.setBackgroundImage(UIImage(named: "navigationShare_20x20_"), forState: .Normal)
+        loveBtn.frame.size = CGSize(width: 24, height: 24)
+        shareBtn.frame.size = CGSize(width: 24, height: 24)
     }
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        SVProgressHUD.dismiss()
     }
 
 }
