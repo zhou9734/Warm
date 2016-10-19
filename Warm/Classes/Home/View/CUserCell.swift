@@ -48,11 +48,13 @@ class CUserCell: UITableViewCell {
         offsetY = offsetY + 30
         //个性签名
         let txt = teacher.signature
-        let height = signatureLbl.getHeightByWidthOfAttributedString(_width, title: txt, font: signatureLbl.font)
+        //行距
+        let lineSpacing: CGFloat = 7
+        let height = signatureLbl.getHeightByWidthOfAttributedString(_width, title: txt, font: signatureLbl.font, lineSpacing: lineSpacing)
         signatureLbl.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: height)
         let attrStr = NSMutableAttributedString(string: txt)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
+        paragraphStyle.lineSpacing = lineSpacing
         attrStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, txt.characters.count))
         signatureLbl.attributedText = attrStr
 

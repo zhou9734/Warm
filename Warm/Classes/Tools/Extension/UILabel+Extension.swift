@@ -10,13 +10,13 @@ import UIKit
 
 extension UILabel{
     //获取label的高度(NSMutableAttributedString)
-    func getHeightByWidthOfAttributedString(width: CGFloat, title: String, font: UIFont) -> CGFloat{
+    func getHeightByWidthOfAttributedString(width: CGFloat, title: String, font: UIFont, lineSpacing: CGFloat) -> CGFloat{
         let lbl = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: 0))
         lbl.font = font
         lbl.numberOfLines = 0
         let attrStr = NSMutableAttributedString(string: title)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
+        paragraphStyle.lineSpacing = lineSpacing
         attrStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, title.characters.count))
         lbl.attributedText = attrStr
         lbl.sizeToFit()

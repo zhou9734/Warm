@@ -13,6 +13,7 @@ class MainViewController: UITabBarController {
     private var adImageView: UIImageView?
     var adImage: UIImage?{
         didSet{
+            //进入主界面时图片放到消失动画
             unowned let tmpSelf = self
             adImageView = UIImageView(frame: UIScreen.mainScreen().bounds)
             adImageView!.image = adImage!
@@ -32,6 +33,7 @@ class MainViewController: UITabBarController {
         addChildViewControllers()
         //注册登录通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("doLogin"), name: LoginNotication, object: nil)
+        //登录成功通知
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("loginSuccess"), name: LoginSuccessNotication, object: nil)
     }
     override func viewWillAppear(animated: Bool) {
@@ -43,7 +45,7 @@ class MainViewController: UITabBarController {
         addChildViewController("ExperienceViewController", title: "体验", imageName: "tabbar_discover_24x24_", selectedImage: "tabExperienceOn_22x21_")
         addChildViewController("MeViewController", title: "我", imageName: "tabbar_user_24x24_", selectedImage: "tabMineOn_22x21_")
     }
-
+    //MARK: - 添加子视图控制器
     private func addChildViewController(childControllerName: String?, title: String?, imageName: String?, selectedImage: String?) {
         //获取命名空间
         guard let name = NSBundle.mainBundle().infoDictionary!["CFBundleExecutable"] as? String else {
@@ -96,6 +98,7 @@ extension MainViewController: UITabBarControllerDelegate{
         return true
     }
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        //如果上一次点击的item和本次点击的item相同就刷新页面
         if lastSelectedIndex == selectedIndex{
             let viewCtl = viewController.childViewControllers[0]
             if viewCtl.isKindOfClass(HomeViewController){

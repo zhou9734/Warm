@@ -136,6 +136,7 @@ extension SubjectViewController: UITableViewDelegate{
     }
 }
 extension SubjectViewController: UIWebViewDelegate{
+    //为了解决UIWebView高度自适应
     func webViewDidFinishLoad(webView: UIWebView) {
         //客户端高度
         let str = "document.body.offsetHeight"

@@ -19,6 +19,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         unowned let tmpSelf = self
+        //延时进入主ViewController
         let time = dispatch_time(DISPATCH_TIME_NOW,Int64(1.0 * Double(NSEC_PER_SEC)))
         dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
 

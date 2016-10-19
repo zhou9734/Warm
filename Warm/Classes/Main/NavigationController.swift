@@ -29,6 +29,7 @@ class NavigationController: UINavigationController {
     }
 
     override func pushViewController(viewController: UIViewController, animated: Bool) {
+        //如果自控制器里面不止一个就添加返回按钮
         if childViewControllers.count > 0 {
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backBtn)
             viewController.hidesBottomBarWhenPushed = true

@@ -49,6 +49,7 @@ class PageScrollView: UIView {
         //为了让内容横向滚动，设置横向内容宽度为3个页面的宽度总和
         scrollView.contentSize=CGSizeMake(CGFloat(self.pageWidth*3),
             CGFloat(self.pageHeight))
+        //一页一页的滚动
         scrollView.pagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -57,6 +58,7 @@ class PageScrollView: UIView {
         self.imageView0.frame = CGRect(x: 0, y: 0, width: self.pageWidth, height: self.pageHeight)
         self.imageView1.frame = CGRect(x: self.pageWidth, y: 0, width: self.pageWidth, height: self.pageHeight)
         self.imageView2.frame = CGRect(x: self.pageWidth * 2, y: 0, width: self.pageWidth, height: self.pageHeight)
+        //添加手势点击
         let tap = UITapGestureRecognizer(target: self, action: "imageViewClick:")
         scrollView.addGestureRecognizer(tap)
 
@@ -82,10 +84,12 @@ class PageScrollView: UIView {
         pageCrl.frame = CGRectMake(pageX, pageY, pageW, pageH)
         return pageCrl
     }()
+    //开始定时器
     private func startTimer(){
         timer = nil
         timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "autoTurnNextView", userInfo: nil, repeats: true)
     }
+    //结束定时器
     private func stopTimer(){
         guard let timer = self.timer else{
             return
@@ -95,7 +99,7 @@ class PageScrollView: UIView {
         }
     }
     @objc private func autoTurnNextView(){
-
+        //跳转到下一个
         if currentPage == rounds.count - 1{
             currentPage = 0
         }else{
@@ -114,16 +118,19 @@ class PageScrollView: UIView {
     }
 }
 extension PageScrollView: UIScrollViewDelegate{
+    //停止滚动
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let ratio = scrollView.contentOffset.x/scrollView.frame.size.width
         endScrollMethod(ratio)
     }
+    //停止拖动
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate{
             let ratio = scrollView.contentOffset.x/scrollView.frame.size.width
             endScrollMethod(ratio)
         }
     }
+    //将要开始拖动
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         stopTimer()
     }
@@ -145,9 +152,8 @@ extension PageScrollView: UIScrollViewDelegate{
         updateImageData()
         startTimer()
     }
-    //MARK: - reload data
+    //MARK: - 重新设置数据
     private func updateImageData(){
-
         if currentPage == 0{
             imageView0.sd_setImageWithURL(NSURL(string: rounds.last!.rdata!.avatar!), placeholderImage: placeholderImage)
             imageView1.sd_setImageWithURL(NSURL(string: rounds[currentPage].rdata!.avatar!), placeholderImage: placeholderImage)

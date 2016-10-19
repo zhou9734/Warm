@@ -49,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = defaultsVC()
         window?.makeKeyAndVisible()
         let defaults = NSUserDefaults.standardUserDefaults()
+        //出去上一次选中的城市code如果没有就默认一个
         if let _ = defaults.valueForKey(cityCodeKey) as? String {
 
         }else{
@@ -56,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    //其它app打开本app时调用的的方法(如要就是用于友盟分享)
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         let result = UMSocialSnsService.handleOpenURL(url)
         if !result {
@@ -89,7 +91,7 @@ extension AppDelegate{
             //已经登录判断是否有新版本
             return isNewVersion() ? NewFeatureViewController() : WelcomeViewController()
         }
-        //没有登录就去登录
+        //没有登录就去主界面
         return MainViewController()
     }
     //判断是否有新版本

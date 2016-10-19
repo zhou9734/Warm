@@ -48,7 +48,7 @@ class SubjectHeadView: UIView {
             make.width.equalTo(70)
         }
         contentWebView.snp_makeConstraints { (make) -> Void in
-            make.top.equalTo(spliteView.snp_top).offset(40)
+            make.top.equalTo(spliteView.snp_top).offset(25)
             make.left.equalTo(self.snp_left)
             make.right.equalTo(self.snp_right)
             make.bottom.equalTo(self.snp_bottom)

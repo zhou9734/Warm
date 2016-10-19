@@ -30,18 +30,19 @@ class SalonScrollView: UIScrollView {
                 if i.hasPrefix("<p>"){
                     let txt = i.substring(3, (i.characters.count - 4))
                     let lbl = createLbl()
-                    let height = lbl.getHeightByWidthOfAttributedString(width, title: txt, font: lbl.font)
+                    let lineSpacing: CGFloat = 5
+                    let height = lbl.getHeightByWidthOfAttributedString(width, title: txt, font: lbl.font, lineSpacing: lineSpacing)
                     lbl.frame = CGRect(x: 15.0, y: offsetY + 15, width: width, height: height)
                     let attrStr = NSMutableAttributedString(string: txt)
                     let paragraphStyle = NSMutableParagraphStyle()
-                    paragraphStyle.lineSpacing = 5
+                    paragraphStyle.lineSpacing = lineSpacing
                     attrStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, txt.characters.count))
                     lbl.attributedText = attrStr
 
                     offsetY = offsetY + height + 15
                     addSubview(lbl)
                 }else if i.hasPrefix("<img"){
-                    let iv = createImg(i)
+                    let iv = createImageView(i)
                     iv.frame = CGRect(x: 0, y: offsetY + 15.0, width: ScreenWidth, height: 220.0)
                     offsetY = offsetY + 220.0 + 15
                     addSubview(iv)
@@ -115,8 +116,8 @@ class SalonScrollView: UIScrollView {
         lbl.numberOfLines = 0
         return lbl
     }
-
-    private func createImg(imgTag: String) -> UIImageView{
+    //提取<img src=""/>中的scr来创建imageView
+    private func createImageView(imgTag: String) -> UIImageView{
         let failIv = UIImageView(image: UIImage(named: "CoursePlaceholder_375x240_")!)
         let pattern = "src=\".*?\""
         do{

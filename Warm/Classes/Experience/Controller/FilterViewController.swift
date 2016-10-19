@@ -146,6 +146,9 @@ extension FilterViewController: UITableViewDataSource{
         return experienceViewModel.classes.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row > experienceViewModel.classes.count {
+            return UITableViewCell()
+        }
         let _class = experienceViewModel.classes[indexPath.row]
         if let tags_hd = _class.tags_bd where tags_hd.count > 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(EFilterTableBaseTagCellReuseIdentifier, forIndexPath: indexPath) as! ETableViewTagCell

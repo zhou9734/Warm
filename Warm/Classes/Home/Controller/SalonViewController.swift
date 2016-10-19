@@ -80,6 +80,7 @@ class SalonViewController: UIViewController {
     }
 }
 extension SalonViewController: UIScrollViewDelegate{
+    //滚动事件
     func scrollViewDidScroll(scrollView: UIScrollView) {
         unowned let tmpSelf = self
         let currentPostion = scrollView.contentOffset.y;

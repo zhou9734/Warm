@@ -10,7 +10,6 @@ import UIKit
 import SDWebImage
 
 class HomeTableViewCell: UITableViewCell {
-    //placeholderImage
     var salon: WSalon?{
         didSet{
             guard let _salon = salon else{

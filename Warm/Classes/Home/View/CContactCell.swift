@@ -29,32 +29,38 @@ class CContactCell: UITableViewCell {
 
     private func setupUI(_info: WInfo){
         let _width = ScreenWidth - 30
-        //如何参与lbl
-        joinTipLbl.frame = CGRect(x: 15.0, y: offsetY, width: 120, height: 30)
-        contentView.addSubview(joinTipLbl)
-        offsetY = offsetY + 35
-        //分割线
-        spliteLine.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: 1.0)
-        contentView.addSubview(spliteLine)
-        offsetY = offsetY + 21
+        if _info.buy_tips != "" {
+            //如何参与lbl
+            joinTipLbl.frame = CGRect(x: 15.0, y: offsetY, width: 120, height: 30)
+            contentView.addSubview(joinTipLbl)
+            offsetY = offsetY + 35
+            //分割线
+            spliteLine.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: 1.0)
+            contentView.addSubview(spliteLine)
+            offsetY = offsetY + 21
 
-        //购买详细
-        let buyTipLbl = createTipsLbl()
-        let txt = _info.buy_tips
-        let buytipHeight = buyTipLbl.getHeightByWidthOfAttributedString(_width, title: txt, font: buyTipLbl.font)
-        buyTipLbl.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: buytipHeight)
-        let attrStr = NSMutableAttributedString(string: txt)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 4
-        attrStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, txt.characters.count))
-        buyTipLbl.attributedText = attrStr
+            //购买详细
+            let buyTipLbl = createTipsLbl()
+            let txt = _info.buy_tips
+            let lineSpacing: CGFloat = 4
+            let buytipHeight = buyTipLbl.getHeightByWidthOfAttributedString(_width, title: txt, font: buyTipLbl.font,lineSpacing: lineSpacing)
+            buyTipLbl.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: buytipHeight)
+            let attrStr = NSMutableAttributedString(string: txt)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing
+            attrStr.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, txt.characters.count))
+            buyTipLbl.attributedText = attrStr
 
-        offsetY = offsetY + buytipHeight + 10
-        contentView.addSubview(buyTipLbl)
-        //分割
-        spliteView.frame = CGRect(x: 0, y: offsetY, width: ScreenWidth, height: 10)
-        offsetY = offsetY + 20
-        contentView.addSubview(spliteView)
+            offsetY = offsetY + buytipHeight + 10
+            contentView.addSubview(buyTipLbl)
+            //分割
+            spliteView.frame = CGRect(x: 0, y: offsetY, width: ScreenWidth, height: 10)
+            offsetY = offsetY + 20
+            contentView.addSubview(spliteView)
+        }else{
+            joinTipLbl.hidden = true
+            spliteLine.hidden = true
+        }
         //暖提示
         warmLbl.frame = CGRect(x: 15.0, y: offsetY, width: 120, height: 30)
         contentView.addSubview(warmLbl)
@@ -66,7 +72,10 @@ class CContactCell: UITableViewCell {
         //暖提示详情
         let warmTipLbl = createTipsLbl()
         let wtxt = _info.warmup_tips
-        let warmtipHeight = buyTipLbl.getHeightByWidthOfAttributedString(_width, title: wtxt, font: warmTipLbl.font)
+        let lineSpacing: CGFloat = 4
+        let warmtipHeight = warmTipLbl.getHeightByWidthOfAttributedString(_width, title: wtxt, font: warmTipLbl.font, lineSpacing: lineSpacing)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
         warmTipLbl.frame = CGRect(x: 15.0, y: offsetY, width: _width, height: warmtipHeight)
 
         let wattrStr = NSMutableAttributedString(string: wtxt)

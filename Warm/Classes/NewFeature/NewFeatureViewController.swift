@@ -44,8 +44,6 @@ extension NewFeatureViewController: UICollectionViewDataSource{
 //MARK: - UICollectionViewDelegate代理
 extension NewFeatureViewController: UICollectionViewDelegate{
     func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        //注意: 传入的cell和indexPath都是上一页的,不是当前页的
-
         //手动获取当前显示的cell对应的index
         let index = collectionView.indexPathsForVisibleItems().last!
         //根据指定的index获取当前显示的cell

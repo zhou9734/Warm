@@ -32,6 +32,7 @@ class HomeViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("recommendImageClick:"), name: RecommendImageClick, object: nil)
         view.addSubview(tableView)
     }
+    //设置刷新
     private func setupRefresh(){
         tableView.header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: Selector("loadHomeData"))
         tableView.header.beginRefreshing()
@@ -140,7 +141,9 @@ extension HomeViewController: UITableViewDataSource{
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(HomeTableReuseIdentifier, forIndexPath: indexPath) as! HomeTableViewCell
-        cell.salon = homeViewModel.salons[indexPath.row]
+        if indexPath.row <= homeViewModel.salons.count - 1{
+            cell.salon = homeViewModel.salons[indexPath.row]
+        }
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

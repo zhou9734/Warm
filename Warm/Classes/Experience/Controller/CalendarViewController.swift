@@ -60,7 +60,7 @@ class CalendarViewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         tv.backgroundColor = UIColor.whiteColor()
-        let _headView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight * 0.45))
+        let _headView = UIView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight * 0.415 + 20))
         _headView.backgroundColor = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
         _headView.addSubview(self.calendarScrollView)
         _headView.addSubview(self.dateLbl)
@@ -68,14 +68,14 @@ class CalendarViewController: UIViewController {
         return tv
     }()
     
-    private lazy var calendarScrollView: ECalendarScrollView = ECalendarScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight * 0.42))
+    private lazy var calendarScrollView: ECalendarScrollView = ECalendarScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth, height: ScreenHeight * 0.415))
 
     private lazy var dateLbl: UILabel = {
         let lbl = UILabel()
         lbl.textColor = UIColor.darkGrayColor()
         lbl.textAlignment = .Left
         lbl.font = UIFont.systemFontOfSize(15)
-        lbl.frame = CGRect(x: 20, y: ScreenHeight * 0.41 + 5, width: 200, height: 20)
+        lbl.frame = CGRect(x: 20, y: ScreenHeight * 0.415, width: 200, height: 20)
         return lbl
     }()
 
@@ -132,6 +132,9 @@ extension CalendarViewController: UITableViewDataSource{
         return experienceViewModel.classes.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if indexPath.row > experienceViewModel.classes.count {
+            return UITableViewCell()
+        }
         let _class = experienceViewModel.classes[indexPath.row]
         if let tags_hd = _class.tags_bd where tags_hd.count > 0{
             let cell = tableView.dequeueReusableCellWithIdentifier(ECalendarTableBaseTagCellReuseIdentifier, forIndexPath: indexPath) as! ETableViewTagCell

@@ -159,6 +159,8 @@ class ClassesViewController: UIViewController {
     }
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        tmpWebView.delegate = nil
+        tmpWebView.stopLoading()
         SVProgressHUD.dismiss()
     }
 
@@ -206,6 +208,7 @@ extension ClassesViewController: UITableViewDelegate {
 }
 
 extension ClassesViewController: UIWebViewDelegate{
+    //为了解决UIWebView高度自适应问题
     func webViewDidFinishLoad(webView: UIWebView) {
         //客户端高度
 //        let str = "document.body.offsetHeight"

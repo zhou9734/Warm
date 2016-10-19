@@ -149,33 +149,32 @@ class LoginInViewController: UIViewController {
     @objc private func loginBtnClick(){
         SVProgressHUD.show()
         unowned let tmpSelf = self
-        if usernameTxtField.text == "123" && pwdTxtField.text == "123"{
-            let path = "v5/users/thirdLogin"
-            let params: [String: AnyObject] = ["type": 0,"client": "mobile","accesstoken": "TKakkGhvRNBmBIHBjh2jO4Y41a5vJ8qdRZwt9oK5YdZO9MLmUS5JwHIQrRgYeT3RskfyQaq4aWZUfsuAe_OC305hssmRbq9Y02zY-S7Nn7A","openid": "oT8EJt7bH2aGtBlV7tQfkyPBb3WE"]
-            NetworkTools.sharedInstance.POST(path, parameters: params, success: { (task, objc) -> Void in
-                    //返回数据给调用者
-                    guard let _array = objc["result"] else{
-                        alert("登录失败!")
-                        return
-                    }
-                    var token: Token?
-                    if let _user = _array!["user"] as? [String: AnyObject]{
-                        token = Token(dict: _user)
-                    }else{
-                        token = tmpSelf.loadToken()
-                    }
-                    token!.saveAccount()
-                    SVProgressHUD.dismiss()
-                    tmpSelf.navigationController?.popViewControllerAnimated(true)
-                    tmpSelf.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                    NSNotificationCenter.defaultCenter().postNotificationName(LoginSuccessNotication, object: nil)
-                }, failure: { (task, error) -> Void in
-                    alert("登录失败!")
-            })
-
-        }else{
+        if usernameTxtField.text != "123" || pwdTxtField.text != "123"{
             alert("账号或密码错误!")
+            return
         }
+        let path = "v5/users/thirdLogin"
+        let params: [String: AnyObject] = ["type": 0,"client": "mobile","accesstoken": "TKakkGhvRNBmBIHBjh2jO4Y41a5vJ8qdRZwt9oK5YdZO9MLmUS5JwHIQrRgYeT3RskfyQaq4aWZUfsuAe_OC305hssmRbq9Y02zY-S7Nn7A","openid": "oT8EJt7bH2aGtBlV7tQfkyPBb3WE"]
+        NetworkTools.sharedInstance.POST(path, parameters: params, success: { (task, objc) -> Void in
+            //返回数据给调用者
+            guard let _array = objc["result"] else{
+                alert("登录失败!")
+                return
+            }
+            var token: Token?
+            if let _user = _array!["user"] as? [String: AnyObject]{
+                token = Token(dict: _user)
+            }else{
+                token = tmpSelf.loadToken()
+            }
+            token!.saveAccount()
+            SVProgressHUD.dismiss()
+            tmpSelf.navigationController?.popViewControllerAnimated(true)
+            tmpSelf.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName(LoginSuccessNotication, object: nil)
+            }, failure: { (task, error) -> Void in
+                alert("登录失败!")
+        })
     }
 
     private func loadToken() -> Token?{
