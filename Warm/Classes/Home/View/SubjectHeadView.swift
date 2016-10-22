@@ -64,7 +64,8 @@ class SubjectHeadView: UIView {
     }()
     private lazy var spliteView: UIView = {
         let v = UIView()
-        v.backgroundColor = SpliteColor
+//        v.backgroundColor = SpliteColor
+        v.backgroundColor = UIColor.grayColor()
         return v
     }()
 

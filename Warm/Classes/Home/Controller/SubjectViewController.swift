@@ -20,8 +20,13 @@ class SubjectViewController: UIViewController {
                 SVProgressHUD.showErrorWithStatus("参数传递错误")
                 return
             }
-            SVProgressHUD.show()
+            view.addSubview(progressBar)
+            view.bringSubviewToFront(progressBar)
             unowned let tmpSelf = self
+            tmpSelf.progressBar.progress = 0.7
+            UIView.animateWithDuration(1) { () -> Void in
+                tmpSelf.view.layoutIfNeeded()
+            }
             homeViewModel.loadSubjectDetail(_subid) { (data, error) -> () in
                 guard let _rdata = data as? WRdata else {
                     return
@@ -61,7 +66,6 @@ class SubjectViewController: UIViewController {
         tv.registerClass(SubjectClassesTableViewCell.self, forCellReuseIdentifier: SubjectClassesTableReuseIdentifier)
         tv.dataSource = self
         tv.delegate = self
-//        tv.tableHeaderView = self.tableHeadView
         tv.separatorStyle = .None
         return tv
     }()
@@ -75,6 +79,16 @@ class SubjectViewController: UIViewController {
         wv.sizeToFit()
         return wv
     }()
+
+    //进度条
+    private lazy var progressBar: UIProgressView = {
+        let pb = UIProgressView()
+        pb.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: 1)
+        pb.backgroundColor = UIColor.whiteColor()
+        pb.progressTintColor = UIColor(red: 116.0/255.0, green: 213.0/255.0, blue: 53.0/255.0, alpha: 1.0)
+        return pb
+    }()
+
     @objc func loveBtnClick(btn: UIButton){
         btn.selected = !btn.selected
     }
@@ -145,6 +159,14 @@ extension SubjectViewController: UIWebViewDelegate{
         //移除多余的webView
         tmpWebView.removeFromSuperview()
 
+        unowned let tmpSelf = self
+        tmpSelf.progressBar.progress = 1.0
+        UIView.animateWithDuration(1.3, animations: { () -> Void in
+            tmpSelf.view.layoutIfNeeded()
+            }) { (_) -> Void in
+                tmpSelf.progressBar.removeFromSuperview()
+        }
+
         tableHeadView.frame = CGRect(x: 0, y: 0,  width: ScreenWidth, height: height)
         guard let data = rdata else{
             SVProgressHUD.dismiss()
@@ -155,7 +177,7 @@ extension SubjectViewController: UIWebViewDelegate{
         tableHeadView.urlString = data.content
         tableView.tableHeaderView = tableHeadView
         tableView.reloadData()
-        SVProgressHUD.dismiss()
+//        SVProgressHUD.dismiss()
     }
 }
 

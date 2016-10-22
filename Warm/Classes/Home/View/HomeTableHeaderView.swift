@@ -16,8 +16,14 @@ class HomeTableHeaderView: UIView {
     }
     var recommends: [WRecommend]?{
         didSet{
-            recommendView.recommends = recommends!
-            textLbl.hidden = false
+            if recommends?.count <= 0{
+                recommendView.hidden = true
+                textLbl.hidden = true
+            }else{
+                recommendView.recommends = recommends!
+                textLbl.hidden = false
+            }
+            
         }
     }
     override init(frame: CGRect) {

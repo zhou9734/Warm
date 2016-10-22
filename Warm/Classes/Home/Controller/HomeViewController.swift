@@ -66,6 +66,12 @@ class HomeViewController: BaseViewController {
             tmpSelf.tableView.reloadData()
             tmpSelf.tableHeadView.rounds = tmpSelf.homeViewModel.rounds
             tmpSelf.tableHeadView.recommends = tmpSelf.homeViewModel.recommends
+            var height: CGFloat = 325;
+            if tmpSelf.homeViewModel.recommends.count <= 0{
+                height = 175
+            }
+            tmpSelf.tableHeadView.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: ScreenWidth, height: height))
+            tmpSelf.tableView.tableHeaderView = tmpSelf.tableHeadView
         }
     }
     //MARK: - 懒加载
@@ -79,10 +85,9 @@ class HomeViewController: BaseViewController {
         tv.dataSource = self
         tv.delegate = self
         tv.backgroundColor = UIColor.whiteColor()
-        tv.tableHeaderView = self.tableHeadView
         return tv
     }()
-    private lazy var tableHeadView = HomeTableHeaderView(frame: CGRect(origin: CGPointZero, size: CGSize(width: ScreenWidth, height: 325)))
+    private lazy var tableHeadView = HomeTableHeaderView(frame: CGRectZero)
     //左边按钮点击事件
     @objc private func leftBtnClick(){
         if isLogin() {

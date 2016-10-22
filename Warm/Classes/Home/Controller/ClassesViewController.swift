@@ -15,14 +15,20 @@ class ClassesViewController: UIViewController {
     var rowHeightCaches = [String: CGFloat]()
     var cellRefreshCount = 1
     var classes: WClass?
+    var headViewHeight: CGFloat = 0
     var classesId: Int64?{
         didSet{
             guard let id = classesId else{
                 return
             }
-            SVProgressHUD.setDefaultMaskType(.Black)
-            SVProgressHUD.show()
+            view.addSubview(progressBar)
+            view.bringSubviewToFront(progressBar)
             unowned let tmpSelf = self
+
+            tmpSelf.progressBar.progress = 0.7
+            UIView.animateWithDuration(1) { () -> Void in
+                tmpSelf.view.layoutIfNeeded()
+            }
             homeViewModel.loadClassesDetail(id) { (data, error) -> () in
                 guard let _classes = data as? WClass else {
                     return
@@ -43,6 +49,8 @@ class ClassesViewController: UIViewController {
         super.viewWillAppear(animated)
         //隐藏navigationBar
         navigationController?.navigationBarHidden = true
+        btnContainer.hidden = true
+        joinView.hidden = true
     }
     private func setupUI(){
         view.backgroundColor = UIColor.whiteColor()
@@ -124,6 +132,16 @@ class ClassesViewController: UIViewController {
         wv.sizeToFit()
         return wv
     }()
+
+    //进度条
+    private lazy var progressBar: UIProgressView = {
+        let pb = UIProgressView()
+        pb.frame = CGRect(x: 0, y: 64, width: ScreenWidth, height: 1)
+        pb.backgroundColor = UIColor.whiteColor()
+        pb.progressTintColor = UIColor(red: 116.0/255.0, green: 213.0/255.0, blue: 53.0/255.0, alpha: 1.0)
+        return pb
+    }()
+
     //按钮容器
     lazy var btnContainer = CBtnContainerView(frame: CGRectZero)
 
@@ -221,6 +239,16 @@ extension ClassesViewController: UIWebViewDelegate{
         let height = webView.scrollView.contentSize.height
         //移除多余的webView
         tmpWebView.removeFromSuperview()
+        btnContainer.hidden = false
+        joinView.hidden = false
+
+        unowned let tmpSelf = self
+        tmpSelf.progressBar.progress = 1.0
+        UIView.animateWithDuration(1.3, animations: { () -> Void in
+            tmpSelf.view.layoutIfNeeded()
+            }) { (_) -> Void in
+                tmpSelf.progressBar.removeFromSuperview()
+        }
 
         rowHeightCaches = [String: CGFloat]()
         rowHeightCaches["0"] = height
@@ -235,13 +263,12 @@ extension ClassesViewController: UIWebViewDelegate{
             rowHeightCaches["2"] = contactCellHeight
         }
 
-        let headViewHeight = tableHeadView.calculate(classes!)
+        headViewHeight = tableHeadView.calculate(classes!)
         tableHeadView.addSubview(btnContainer)
         btnContainer.frame = CGRect(x: 0, y: headViewHeight, width: ScreenWidth, height: 45)
         tableHeadView.frame = CGRect(x: 0, y: -22, width: ScreenWidth, height: headViewHeight + 45)
         tableView.tableHeaderView = tableHeadView
         tableView.reloadData()
-        SVProgressHUD.dismiss()
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //释放选中效果
@@ -279,12 +306,12 @@ extension ClassesViewController: UIScrollViewDelegate{
         if(offsetY > 0 && tableHeadView.frame.origin.y > -tableHeadView.frame.size.height + 64){
             //设定navBackView 的颜色
             if( (offsetY) / 32 < 1.0){
-                navibackView.backgroundColor = UIColor.whiteColor()
+                navibackView.backgroundColor = UIColor(white: 1.0, alpha: 1)
                 changeBtnImage()
             }
         }else if(offsetY < 0 && tableHeadView.frame.origin.y <= 0){
             if(-offsetY/32 < 1.0 ){
-                navibackView.backgroundColor = UIColor.clearColor()
+                navibackView.backgroundColor = UIColor(white: 1.0, alpha: 0)
                 defaultImage()
             }
         }
